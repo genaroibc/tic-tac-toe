@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/1590035fca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <main class="main-cont">
+      <section class="points-sect">
+        <div class="points-sect__user-sect">
+          <p>User victories: <span id="user-points-span">0</span></p>
+        </div>
+        <button class="points-sect__btn" id="reset-points-btn">
+          Reset Points
+        </button>
+        <div class="points-sect__pc-sect">
+          <p>PC victories: <span id="pc-points-span">0</span></p>
+        </div>
+      </section>
+      <button
+        class="points-sect__responsive-btn"
+        id="responsive-reset-points-btn"
+      >
+        Reset Points
+      </button>
+      <br>
+      <section class="main-cont__cont">
+        <div class="main-cont__cont__cube cube cube-1"></div>
+        <div class="main-cont__cont__cube cube cube-2"></div>
+        <div class="main-cont__cont__cube cube cube-3"></div>
+        <div class="main-cont__cont__cube cube cube-4"></div>
+        <div class="main-cont__cont__cube cube cube-5"></div>
+        <div class="main-cont__cont__cube cube cube-6"></div>
+        <div class="main-cont__cont__cube cube cube-7"></div>
+        <div class="main-cont__cont__cube cube cube-8"></div>
+        <div class="main-cont__cont__cube cube cube-9"></div>
+      </section>
+      <br />
+      <button id="reload-btn">Play Again</button>
+    </main>
+
+    <footer class="foot">
+      <div class="foot__copy">
+        <p class="foot__copy__pgph">
+          Creado por Genaro Ismael Bonavita en 2022
+        </p>
+      </div>
+      <div class="foot__icons">
+        <a target="blank" href="https://instagram.com/genaro_ibc">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a target="blank" href="https://github.com/GenaroIBC">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>
