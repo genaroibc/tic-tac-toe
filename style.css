@@ -50,7 +50,7 @@ button {
 }
 
 .cube {
-  background-color: cornflowerblue;
+  background-color: #6495ed;
   width: 30%;
   height: 30%;
   border: 4px solid #000;
@@ -155,6 +155,11 @@ i {
   }
 }
 
+@keyframes removeAnimation {
+  50% {
+    transform: rotateZ(0deg);
+  }
+}
 /* MEDIA QUERIES */
 @media (max-width: 700px) {
   body {
@@ -166,7 +171,7 @@ i {
     padding: 0.5rem;
   }
   .main-cont__cont {
-    width:  78vw;
+    width: 78vw;
     height: 78vw;
   }
   .points-sect__btn {

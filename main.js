@@ -28,6 +28,8 @@ const combs = {
   diag2: [cube3, cube5, cube7],
 };
 
+const $CUBES = Array.from(document.querySelectorAll(".cube"));
+
 userPointsSpan.textContent = localStorage.getItem("user-victories") || 0;
 pcPointsSpan.textContent = localStorage.getItem("pc-victories") || 0;
 
@@ -37,24 +39,16 @@ const pcColor = "darkorchid";
 function smartMovement() {
   let cube;
 
-  console.log("***** PC *****");
-  console.log(findSmartLine("pc"));
-  console.log("***** USER *****");
-  console.log(findSmartLine("user"));
-
   if (findSmartLine("pc")) {
     const line = findSmartLine("pc");
     cube = combs[line].find(isFree);
-    console.log("not random cube choosed");
   } else if (findSmartLine("user")) {
     const line = findSmartLine("user");
     cube = combs[line].find(isFree);
-    console.log("not random cube choosed");
   } else {
     const cubes = Array.from(document.querySelectorAll(".cube"));
     const freeCubes = cubes.filter(isFree);
     cube = freeCubes[randomNum(freeCubes.length - 1, 0)];
-    console.log("random cube choosed");
   }
   cube.style.backgroundColor = pcColor;
   cube.classList.add("pc");
@@ -83,11 +77,6 @@ function thereIsALine(clss) {
 function isFree(cube) {
   return !cube.classList.contains("user") && !cube.classList.contains("pc");
 }
-function areNotCubesFree() {
-  const pcCubes = document.querySelectorAll(".pc");
-  const userCubes = document.querySelectorAll(".user");
-  console.log(userCubes.length === 5 && pcCubes.length === 4);
-}
 function areCubesFree() {
   const pcCubes = document.querySelectorAll(".pc");
   const userCubes = document.querySelectorAll(".user");
@@ -96,7 +85,6 @@ function areCubesFree() {
 function victory(who) {
   mainContainer.removeEventListener("click", useTurn);
   const response = thereIsALine(who);
-  // console.log(response)
   let animationName;
   if (who === "user") {
     if (localStorage.getItem("user-victories")) {
@@ -138,10 +126,13 @@ function rotateReplayBtn() {
   setTimeout(() => {
     reloadBtn.style.animationName = "slidein";
     reloadBtn.style.animationDuration = ".8s";
-    reloadBtn.style.animationIterationCount = "infinite";
+    reloadBtn.style.animationIterationCount = "3";
     reloadBtn.style.animationTimingFunction = "ease-in-out";
     reloadBtn.style.animationDirection = "alternate";
   }, 1000);
+  setTimeout(() => {
+    reloadBtn.style.transform = "rotateZ(0deg)";
+  }, 3500);
 }
 
 function useTurn(e) {
@@ -178,46 +169,30 @@ function resetPoints() {
 }
 
 mainContainer.addEventListener("click", useTurn);
-reloadBtn.addEventListener("click", () => location.reload());
+reloadBtn.addEventListener("click", clearInterface);
 resetPointsBtn.addEventListener("click", resetPoints);
 responsiveResetPointsBtn.addEventListener("click", resetPoints);
 
-// media query
-// const MEDIA_QUERY = matchMedia("(max-width: 700px)");
+function clearInterface() {
+  mainContainer.addEventListener("click", useTurn);
+  reloadBtn.style = "";
+  mainContainer.style.borderColor = "";
+  $CUBES.forEach((cube) => {
+    cube.classList.remove("user", "pc");
+    cube.style = "";
+    cube.style.backgroundColor = "#6495ed";
+  });
+}
 
-// function screenTest(e) {
-//   // console.log(e);
-//   if (e.matches) {
-//     responsiveResetPointsBtn.style.display = "block";
-//     resetPointsBtn.style.display = "none";
-//   } else {
-//     responsiveResetPointsBtn.style.display = "none";
-//     resetPointsBtn.style.display = "block";
-//   }
-// }
+const gradients = [
+  "linear-gradient(to RIGHT, #07f, #7f0)",
+  "linear-gradient(to RIGHT, #f70, #07f)",
+  "linear-gradient(to RIGHT, #70f, #f07)",
+  "linear-gradient(to RIGHT, #0f7, #70f)",
+  "linear-gradient(to RIGHT, #f07, #0f7)",
+  "linear-gradient(to RIGHT, #7f0, #f70)",
+];
 
-// MEDIA_QUERY.addEventListener("change", screenTest);
-
-// before implement search for hover with JS
-
-// function showWinnerColor(color) {
-//   const elements = document.querySelectorAll("[data-victory-color]");
-//   elements.forEach((el) => {
-//     // el.style.borderColor = color;
-//     el.style.color = color;
-//   });
-//   console.log(elements);
-// }
-
-// const gradients = [
-//   "linear-gradient(to RIGHT, #07f, #7f0)",
-//   "linear-gradient(to RIGHT, #f70, #07f)",
-//   "linear-gradient(to RIGHT, #70f, #f07)",
-//   "linear-gradient(to RIGHT, #0f7, #70f)",
-//   "linear-gradient(to RIGHT, #f07, #0f7)",
-//   "linear-gradient(to RIGHT, #7f0, #f70)",
-// ];
-
-// setInterval(() => {
-//   mainContainer.style.background = gradients[randomNum(6, 0)];
-// }, 7000);
+setInterval(() => {
+  mainContainer.style.background = gradients[randomNum(6, 0)];
+}, 7000);
