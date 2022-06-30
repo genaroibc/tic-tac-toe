@@ -3,10 +3,15 @@
 }
 
 body {
+  margin: 0;
+  min-height: 100vh;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   color: #000;
   background-color: #232323;
   font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 button {
@@ -97,6 +102,7 @@ button {
 
 /* footer */
 .foot {
+  height: 1fr;
   text-align: center;
   background-color: #454545;
   padding: 1rem;
@@ -152,15 +158,16 @@ i {
 /* MEDIA QUERIES */
 @media (max-width: 700px) {
   body {
-    /* transition: 2s; */
-    /* background-color: #444; */
+    justify-content: space-between;
+    /* align-items: center; */
   }
   .main-cont {
+    margin: 0;
     padding: 0.5rem;
   }
   .main-cont__cont {
-    width: 85vw;
-    height: 85vw;
+    width:  78vw;
+    height: 78vw;
   }
   .points-sect__btn {
     width: 40vw;
