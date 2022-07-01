@@ -6,6 +6,16 @@ const resetPointsBtn = document.getElementById("reset-points-btn");
 const responsiveResetPointsBtn = document.getElementById(
   "responsive-reset-points-btn"
 );
+// const $menuBtn = document.getElementById('menu-btn')
+// const $configSidebar = document.getElementById('config-sidebar')
+
+// $menuBtn.addEventListener('mouseenter' , ()=> {
+//   $configSidebar.style.top = '10vh'
+// })
+
+// $menuBtn.addEventListener('mouseleave' , ()=> {
+//   $configSidebar.style.top = '0'
+// })
 const cube1 = document.querySelector(".cube-1");
 const cube2 = document.querySelector(".cube-2");
 const cube3 = document.querySelector(".cube-3");

@@ -140,7 +140,6 @@ i {
 .points-sect__btn:hover,
 .points-sect__responsive-btn:hover {
   transform: rotateZ(0deg);
-  /* transform: scale(1.1); */
   color: goldenrod;
   border-color: goldenrod;
 }
@@ -149,17 +148,30 @@ i {
   display: none;
 }
 
+/* #menu-btn {
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+  border-radius: 1rem;
+  width: 5vw;
+  aspect-ratio: 1/1;
+  padding: 1rem;
+}
+
+#config-sidebar {
+  width: 5vw;
+  left: 2vw;
+  background-color: #eee;
+  position: absolute;
+} */
+
+
 @keyframes slidein {
   50% {
     transform: rotateZ(-15deg);
   }
 }
 
-@keyframes removeAnimation {
-  50% {
-    transform: rotateZ(0deg);
-  }
-}
 /* MEDIA QUERIES */
 @media (max-width: 700px) {
   body {
