@@ -12,11 +12,21 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <!-- <aside id="config-sidebar">
-      <p>Dark</p>
-      <p>Change</p>
-    </aside> -->
-    <!-- <button id="menu-btn">Menu</button> -->
+    <dialog id="settings-modal">
+      <label for="dark-theme">Dark theme</label>
+      <input type="checkbox" name="dark-theme" id="dark-theme" />
+      <br />
+      <label for="color-rainbow">Color rainbow</label>
+      <input type="checkbox" name="color-rainbow" id="color-rainbow" />
+      <br />
+      <br />
+
+      <div class="buttons-container">
+        <button class="modal-btn modal-control-btn succes-btn">Save</button>
+        <button class="modal-btn modal-control-btn danger-btn">Cancel</button>
+      </div>
+    </dialog>
+    <button class="modal-btn" id="open-settings-modal-btn">Settings</button>
     <main class="main-cont">
       <section class="points-sect">
         <div class="points-sect__user-sect">
@@ -35,7 +45,7 @@
       >
         Reset Points
       </button>
-      <br>
+      <br />
       <section class="main-cont__cont">
         <div class="main-cont__cont__cube cube cube-1"></div>
         <div class="main-cont__cont__cube cube cube-2"></div>

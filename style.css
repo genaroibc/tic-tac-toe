@@ -25,7 +25,11 @@ button {
   border-radius: 10px;
   transition: 0.5s;
   background-color: #000;
-  color: #444;
+  color: #666;
+}
+
+input[type="checkbox"] {
+  width: 50px;
 }
 
 .main-cont {
@@ -62,8 +66,6 @@ button {
 }
 
 .cube:hover {
-  /* width: 33%; */
-  /* height: 33%; */
   cursor: pointer;
   transform: rotateZ(90deg);
 }
@@ -148,23 +150,46 @@ i {
   display: none;
 }
 
-/* #menu-btn {
-  position: absolute;
-  top: 2vh;
-  left: 2vw;
-  border-radius: 1rem;
-  width: 5vw;
-  aspect-ratio: 1/1;
-  padding: 1rem;
+.modal-btn {
+  color: #fff;
+  /* background-color: #07f; */
+  /* border: 2px solid #07fa; */
 }
 
-#config-sidebar {
-  width: 5vw;
-  left: 2vw;
-  background-color: #eee;
-  position: absolute;
-} */
+.buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 
+.modal-control-btn {
+  width: 40%;
+  font-size: 1.3rem;
+  display: inline-block;
+}
+
+#settings-modal {
+  color: #fff;
+  /* text-align: center; */
+  border-radius: 10px;
+  background-color: #232323;
+}
+
+#open-settings-modal-btn {
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+  width: 50px;
+}
+
+.danger-btn {
+  background-color: #ed3333;
+}
+
+.succes-btn {
+  background-color: #33ed33;
+  background-color: #33ed33;
+}
 
 @keyframes slidein {
   50% {

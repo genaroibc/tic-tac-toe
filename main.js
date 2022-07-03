@@ -194,15 +194,50 @@ function clearInterface() {
   });
 }
 
-const gradients = [
-  "linear-gradient(to RIGHT, #07f, #7f0)",
-  "linear-gradient(to RIGHT, #f70, #07f)",
-  "linear-gradient(to RIGHT, #70f, #f07)",
-  "linear-gradient(to RIGHT, #0f7, #70f)",
-  "linear-gradient(to RIGHT, #f07, #0f7)",
-  "linear-gradient(to RIGHT, #7f0, #f70)",
-];
+// const gradients = [
+//   "linear-gradient(to RIGHT, #07f, #7f0)",
+//   "linear-gradient(to RIGHT, #f70, #07f)",
+//   "linear-gradient(to RIGHT, #70f, #f07)",
+//   "linear-gradient(to RIGHT, #0f7, #70f)",
+//   "linear-gradient(to RIGHT, #f07, #0f7)",
+//   "linear-gradient(to RIGHT, #7f0, #f70)",
+// ];
 
-setInterval(() => {
-  mainContainer.style.background = gradients[randomNum(6, 0)];
-}, 7000);
+// setInterval(() => {
+//   mainContainer.style.background = gradients[randomNum(6, 0)];
+// }, 7000);
+
+const $SETTINGS_MODAL = document.getElementById("settings-modal");
+const $CHECKBOXES = $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]");
+document.addEventListener("click", (e) => {
+  if (e.target.matches("#open-settings-modal-btn")) {
+    $SETTINGS_MODAL.showModal();
+  } else if (e.target.matches(".modal-control-btn")) {
+    if (e.target.matches(".succes-btn")) {
+      updateUserLocalConfig();
+    }
+
+    $SETTINGS_MODAL.close();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', renderUserLocalConfig)
+function updateUserLocalConfig() {
+  $CHECKBOXES.forEach((input) => {
+    localStorage.setItem(input.name, input.checked);
+  });
+
+  $CHECKBOXES.forEach((input) => {
+    console.log(input.name, "=", localStorage.getItem(input.name));
+  });
+}
+
+function renderUserLocalConfig() {
+  $CHECKBOXES.forEach((input) => {
+    input.checked = JSON.parse(localStorage.getItem(input.name));
+  });
+
+  $CHECKBOXES.forEach((input) => {
+    console.log(input.name, "=", localStorage.getItem(input.name));
+  });
+}
