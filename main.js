@@ -210,7 +210,7 @@ function clearInterface() {
 const $SETTINGS_MODAL = document.getElementById("settings-modal");
 const $CHECKBOXES = $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]");
 document.addEventListener("click", (e) => {
-  if (e.target.matches("#open-settings-modal-btn")) {
+  if (e.target.matches("#open-settings-modal-btn i")) {
     $SETTINGS_MODAL.showModal();
   } else if (e.target.matches(".modal-control-btn")) {
     if (e.target.matches(".succes-btn")) {
@@ -221,7 +221,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', renderUserLocalConfig)
+document.addEventListener("DOMContentLoaded", renderUserLocalConfig);
 function updateUserLocalConfig() {
   $CHECKBOXES.forEach((input) => {
     localStorage.setItem(input.name, input.checked);
@@ -241,3 +241,8 @@ function renderUserLocalConfig() {
     console.log(input.name, "=", localStorage.getItem(input.name));
   });
 }
+
+// function setColor(who) {
+//   const COLOR = $CHECKBOXES.querySelector("input[type=color]").value;
+//   document.body.style.setProperty(`--${who}-color`, COLOR);
+// }

@@ -179,7 +179,14 @@ i {
   position: absolute;
   top: 2vh;
   left: 2vh;
-  width: 50px;
+  width: auto;
+  height: auto;
+  border: none;
+  font-size: 2rem;
+  background-color: inherit;
+}
+#open-settings-modal-btn i {
+  width: 0;
 }
 
 .danger-btn {
