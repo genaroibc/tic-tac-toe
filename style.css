@@ -3,6 +3,8 @@
 }
 
 body {
+  --pc-victory-color: darkmagenta;
+  --user-victory-color: gold;
   margin: 0;
   min-height: 100vh;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
@@ -12,6 +14,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  color: #fff;
 }
 
 button {
@@ -86,18 +89,19 @@ input[type="checkbox"] {
 @keyframes user-wins {
   50% {
     transform: scale(1.1, 1.1);
-    background-color: gold;
+    background-color: var(--user-victory-color);
   }
 }
 
 @keyframes pc-wins {
   50% {
     transform: scale(1.1, 1.1);
-    background-color: darkmagenta;
+    background-color: var(--pc-victory-color);
   }
 }
 
 #reload-btn:hover {
+  font-size: 2.5rem;
   color: goldenrod;
   border-color: goldenrod;
 }
@@ -124,9 +128,14 @@ i {
   padding: 0.8rem;
   display: flex;
   color: #fff;
-  /* background-color: #f07; */
   justify-content: space-between;
   max-width: 1000px;
+}
+
+.points-sect__title {
+  text-align: center;
+  color: #fff;
+  margin: 0;
 }
 
 .points-sect__user-sect,
@@ -152,8 +161,6 @@ i {
 
 .modal-btn {
   color: #fff;
-  /* background-color: #07f; */
-  /* border: 2px solid #07fa; */
 }
 
 .buttons-container {
@@ -170,7 +177,6 @@ i {
 
 #settings-modal {
   color: #fff;
-  /* text-align: center; */
   border-radius: 10px;
   background-color: #232323;
 }
@@ -208,10 +214,10 @@ i {
 @media (max-width: 700px) {
   body {
     justify-content: space-between;
-    /* align-items: center; */
   }
   .main-cont {
     margin: 0;
+    margin: 5vh auto;
     padding: 0.5rem;
   }
   .main-cont__cont {
@@ -224,6 +230,7 @@ i {
   .points-sect {
     padding: 0.5rem;
     margin: 0;
+    justify-content: space-evenly;
   }
   #responsive-reset-points-btn {
     display: block;

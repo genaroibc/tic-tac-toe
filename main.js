@@ -6,16 +6,9 @@ const resetPointsBtn = document.getElementById("reset-points-btn");
 const responsiveResetPointsBtn = document.getElementById(
   "responsive-reset-points-btn"
 );
-// const $menuBtn = document.getElementById('menu-btn')
-// const $configSidebar = document.getElementById('config-sidebar')
+let userColor;
+let pcColor;
 
-// $menuBtn.addEventListener('mouseenter' , ()=> {
-//   $configSidebar.style.top = '10vh'
-// })
-
-// $menuBtn.addEventListener('mouseleave' , ()=> {
-//   $configSidebar.style.top = '0'
-// })
 const cube1 = document.querySelector(".cube-1");
 const cube2 = document.querySelector(".cube-2");
 const cube3 = document.querySelector(".cube-3");
@@ -43,9 +36,6 @@ const $CUBES = Array.from(document.querySelectorAll(".cube"));
 userPointsSpan.textContent = localStorage.getItem("user-victories") || 0;
 pcPointsSpan.textContent = localStorage.getItem("pc-victories") || 0;
 
-const userColor = "goldenrod";
-const pcColor = "darkorchid";
-
 function smartMovement() {
   let cube;
 
@@ -60,8 +50,10 @@ function smartMovement() {
     const freeCubes = cubes.filter(isFree);
     cube = freeCubes[randomNum(freeCubes.length - 1, 0)];
   }
-  cube.style.backgroundColor = pcColor;
   cube.classList.add("pc");
+  document
+    .querySelectorAll(".cube.pc")
+    .forEach((cube) => (cube.style.backgroundColor = pcColor));
 }
 function findSmartLine(who) {
   const smartLines = [];
@@ -144,12 +136,13 @@ function rotateReplayBtn() {
     reloadBtn.style.transform = "rotateZ(0deg)";
   }, 3500);
 }
-
 function useTurn(e) {
   if (e.target.classList.contains("cube") && isFree(e.target)) {
     const cube = e.target;
-    cube.style.backgroundColor = userColor;
     cube.classList.add("user");
+    document
+      .querySelectorAll(".cube.user")
+      .forEach((cube) => (cube.style.backgroundColor = userColor));
 
     if (thereIsALine("user")) {
       victory("user");
@@ -208,13 +201,15 @@ function clearInterface() {
 // }, 7000);
 
 const $SETTINGS_MODAL = document.getElementById("settings-modal");
-const $CHECKBOXES = $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]");
+
 document.addEventListener("click", (e) => {
-  if (e.target.matches("#open-settings-modal-btn i")) {
+  if (e.target.matches("#open-settings-modal-btn")) {
     $SETTINGS_MODAL.showModal();
   } else if (e.target.matches(".modal-control-btn")) {
     if (e.target.matches(".succes-btn")) {
       updateUserLocalConfig();
+    } else if (e.target.matches(".danger-btn")) {
+      renderUserLocalConfig();
     }
 
     $SETTINGS_MODAL.close();
@@ -222,27 +217,30 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", renderUserLocalConfig);
+
 function updateUserLocalConfig() {
-  $CHECKBOXES.forEach((input) => {
+  $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]").forEach((input) => {
     localStorage.setItem(input.name, input.checked);
   });
-
-  $CHECKBOXES.forEach((input) => {
-    console.log(input.name, "=", localStorage.getItem(input.name));
+  $SETTINGS_MODAL.querySelectorAll("input[type=color]").forEach((input) => {
+    localStorage.setItem(input.name, input.value);
   });
+
+  renderUserLocalConfig();
 }
 
 function renderUserLocalConfig() {
-  $CHECKBOXES.forEach((input) => {
+  $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]").forEach((input) => {
     input.checked = JSON.parse(localStorage.getItem(input.name));
   });
 
-  $CHECKBOXES.forEach((input) => {
-    console.log(input.name, "=", localStorage.getItem(input.name));
+  $SETTINGS_MODAL.querySelectorAll("input[type=color]").forEach((input) => {
+    input.value = localStorage.getItem(input.name);
   });
-}
 
-// function setColor(who) {
-//   const COLOR = $CHECKBOXES.querySelector("input[type=color]").value;
-//   document.body.style.setProperty(`--${who}-color`, COLOR);
-// }
+  userColor = localStorage.getItem("user-color") || "goldenrod";
+  pcColor = localStorage.getItem("pc-color") || "darkorchid";
+
+  document.body.style.setProperty("--user-victory-color", userColor);
+  document.body.style.setProperty("--pc-victory-color", pcColor);
+}

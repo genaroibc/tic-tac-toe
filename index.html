@@ -13,8 +13,16 @@
   </head>
   <body>
     <dialog id="settings-modal">
-      <label for="dark-theme">Dark theme</label>
-      <input type="checkbox" name="dark-theme" id="dark-theme" />
+      <label for="user-color">User</label>
+      <br />
+      <input type="color" name="user-color" id="user-color" />
+      <br />
+
+      <label for="pc-color">PC</label>
+      <br />
+      <input type="color" name="pc-color" id="pc-color" />
+
+     
       <br />
       <label for="color-rainbow">Color rainbow</label>
       <input type="checkbox" name="color-rainbow" id="color-rainbow" />
@@ -30,12 +38,13 @@
       <i class="fa-solid fa-gear"></i>
     </button>
     <main class="main-cont">
+      <h3 class="points-sect__title">Points</h3>
       <section class="points-sect">
         <div class="points-sect__user-sect">
           <p>User victories: <span id="user-points-span">0</span></p>
         </div>
         <button class="points-sect__btn" id="reset-points-btn">
-          Reset Points
+          Reset points
         </button>
         <div class="points-sect__pc-sect">
           <p>PC victories: <span id="pc-points-span">0</span></p>
@@ -45,7 +54,7 @@
         class="points-sect__responsive-btn"
         id="responsive-reset-points-btn"
       >
-        Reset Points
+        Reset points
       </button>
       <br />
       <section class="main-cont__cont">
@@ -60,7 +69,7 @@
         <div class="main-cont__cont__cube cube cube-9"></div>
       </section>
       <br />
-      <button id="reload-btn">Play Again</button>
+      <button id="reload-btn">&circlearrowleft;</button>
     </main>
 
     <footer class="foot">
