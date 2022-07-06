@@ -2,12 +2,10 @@ const mainContainer = document.querySelector(".main-cont__cont");
 const reloadBtn = document.getElementById("reload-btn");
 const userPointsSpan = document.getElementById("user-points-span");
 const pcPointsSpan = document.getElementById("pc-points-span");
-const resetPointsBtn = document.getElementById("reset-points-btn");
-const responsiveResetPointsBtn = document.getElementById(
-  "responsive-reset-points-btn"
-);
+
 let userColor;
 let pcColor;
+let backgroundTimer;
 
 const cube1 = document.querySelector(".cube-1");
 const cube2 = document.querySelector(".cube-2");
@@ -170,12 +168,6 @@ function resetPoints() {
   userPointsSpan.textContent = "0";
   pcPointsSpan.textContent = "0";
 }
-
-mainContainer.addEventListener("click", useTurn);
-reloadBtn.addEventListener("click", clearInterface);
-resetPointsBtn.addEventListener("click", resetPoints);
-responsiveResetPointsBtn.addEventListener("click", resetPoints);
-
 function clearInterface() {
   mainContainer.addEventListener("click", useTurn);
   reloadBtn.style = "";
@@ -186,38 +178,6 @@ function clearInterface() {
     cube.style.backgroundColor = "#6495ed";
   });
 }
-
-// const gradients = [
-//   "linear-gradient(to RIGHT, #07f, #7f0)",
-//   "linear-gradient(to RIGHT, #f70, #07f)",
-//   "linear-gradient(to RIGHT, #70f, #f07)",
-//   "linear-gradient(to RIGHT, #0f7, #70f)",
-//   "linear-gradient(to RIGHT, #f07, #0f7)",
-//   "linear-gradient(to RIGHT, #7f0, #f70)",
-// ];
-
-// setInterval(() => {
-//   mainContainer.style.background = gradients[randomNum(6, 0)];
-// }, 7000);
-
-const $SETTINGS_MODAL = document.getElementById("settings-modal");
-
-document.addEventListener("click", (e) => {
-  if (e.target.matches("#open-settings-modal-btn")) {
-    $SETTINGS_MODAL.showModal();
-  } else if (e.target.matches(".modal-control-btn")) {
-    if (e.target.matches(".succes-btn")) {
-      updateUserLocalConfig();
-    } else if (e.target.matches(".danger-btn")) {
-      renderUserLocalConfig();
-    }
-
-    $SETTINGS_MODAL.close();
-  }
-});
-
-document.addEventListener("DOMContentLoaded", renderUserLocalConfig);
-
 function updateUserLocalConfig() {
   $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]").forEach((input) => {
     localStorage.setItem(input.name, input.checked);
@@ -228,7 +188,6 @@ function updateUserLocalConfig() {
 
   renderUserLocalConfig();
 }
-
 function renderUserLocalConfig() {
   $SETTINGS_MODAL.querySelectorAll("input[type=checkbox]").forEach((input) => {
     input.checked = JSON.parse(localStorage.getItem(input.name));
@@ -238,9 +197,55 @@ function renderUserLocalConfig() {
     input.value = localStorage.getItem(input.name);
   });
 
+  if (JSON.parse(localStorage.getItem("color-rainbow"))) {
+    backgroundTimer ? null : renderBackgroundGradients();
+  } else {
+    clearInterval(backgroundTimer);
+    backgroundTimer = null;
+    mainContainer.style.background = "#454545";
+  }
+
   userColor = localStorage.getItem("user-color") || "goldenrod";
   pcColor = localStorage.getItem("pc-color") || "darkorchid";
 
   document.body.style.setProperty("--user-victory-color", userColor);
   document.body.style.setProperty("--pc-victory-color", pcColor);
 }
+function renderBackgroundGradients() {
+  mainContainer.style.background = GRADIENTS[randomNum(6, 0)];
+  backgroundTimer = setInterval(() => {
+    mainContainer.style.background = GRADIENTS[randomNum(6, 0)];
+  }, 7000);
+}
+const GRADIENTS = [
+  "linear-gradient(to RIGHT, #07f, #7f0)",
+  "linear-gradient(to RIGHT, #f70, #07f)",
+  "linear-gradient(to RIGHT, #70f, #f07)",
+  "linear-gradient(to RIGHT, #0f7, #70f)",
+  "linear-gradient(to RIGHT, #f07, #0f7)",
+  "linear-gradient(to RIGHT, #7f0, #f70)",
+];
+
+const $SETTINGS_MODAL = document.getElementById("settings-modal");
+
+document.addEventListener("click", (e) => {
+  if (e.target.matches("#open-settings-modal-btn i")) {
+    $SETTINGS_MODAL.showModal();
+  } else if (e.target.matches(".modal-control-btn")) {
+    if (e.target.matches(".succes-btn")) {
+      updateUserLocalConfig();
+    } else if (e.target.matches(".danger-btn")) {
+      renderUserLocalConfig();
+    }
+
+    $SETTINGS_MODAL.close();
+  } else if (e.target.matches("#reload-btn")) clearInterface();
+  else if (
+    e.target.matches("#reset-points-btn") ||
+    e.target.matches("#responsive-reset-points-btn")
+  )
+    resetPoints();
+});
+
+document.addEventListener("DOMContentLoaded", renderUserLocalConfig);
+mainContainer.addEventListener("click", useTurn);
