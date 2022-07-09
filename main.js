@@ -229,7 +229,7 @@ const GRADIENTS = [
 const $SETTINGS_MODAL = document.getElementById("settings-modal");
 
 document.addEventListener("click", (e) => {
-  if (e.target.matches("#open-settings-modal-btn i")) {
+  if (e.target.matches("#open-settings-modal-btn *")) {
     $SETTINGS_MODAL.showModal();
   } else if (e.target.matches(".modal-control-btn")) {
     if (e.target.matches(".succes-btn")) {
